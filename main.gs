@@ -39,6 +39,9 @@ function fetchClaim() {
 		case 409:
 			Logger.log("Already claimed.");
 			break;
+		case 404:
+			Logger.log("No giveaway is present.");
+			break;
 		case 401:
 			Logger.log("Unauthorized");
 			sendMessage("Got: `Unauthorized` response please reinput your tokens.");
