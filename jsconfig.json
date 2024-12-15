@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ES6",
+      "checkJs": true,
+    },
+    "files": ["main.gs"],
+    "include": [
+      "C:/Users/User/AppData/Local/pnpm/global/5/node_modules/@types/google-apps-script/index.d.ts"
+      // replace with pnpm root -g
+    ],
+}
