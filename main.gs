@@ -46,7 +46,7 @@ function fetchClaim() {
 			Logger.log("Unauthorized");
 			sendMessage("Got: `Unauthorized` response please reinput your tokens.");
 			break;
-		case 200:
+		case 201:
 			Logger.log("Claimed a game!");
 			sendMessage("Claimed a game!");
 			break;
