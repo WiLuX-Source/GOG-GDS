@@ -9,10 +9,10 @@ const claim_url = "https://www.gog.com/giveaway/claim";
  * @returns {string | undefined}
  */
 function extractCookies(setCookieHeader) {
-	if (typeof setCookieHeader === "string") {
-		return setCookieHeader.split(";")[0];
-	} else if (Array.isArray(setCookieHeader)) {
-		return setCookieHeader.map((header) => header.split(";")[0]).join("; ");
+	if (Array.isArray(setCookieHeader)) {
+		let cookieString = "csrf=true;";
+		cookieString += setCookieHeader.map((header) => header.split(";")[0]).join("; ");
+		return cookieString;
 	}
 	return undefined;
 }
@@ -27,7 +27,7 @@ function fetchClaim() {
 		method: "get",
 		headers: {
 			Cookie: cookies,
-			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gejavacko) Chrome/117.0.0.0 Safari/537.36",
 		},
 		muteHttpExceptions: true,
 	};
@@ -49,6 +49,7 @@ function fetchClaim() {
 		case 201:
 			Logger.log("Claimed a game!");
 			sendMessage("Claimed a game!");
+			toggleNewsletter();
 			break;
 		default:
 			Logger.log("Unexpected");
@@ -84,7 +85,30 @@ function sendMessage(data) {
 	};
 	UrlFetchApp.fetch(webhook_url, options);
 }
-
+/**
+ * Toggles newsletter subscription
+ */
+function toggleNewsletter() {
+	/**
+	 * @type {GoogleAppsScript.URL_Fetch.URLFetchRequestOptions}
+	 */
+	const options = {
+		method: "post",
+		muteHttpExceptions: true,
+		headers: {
+			cookie: cookies,
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gejavacko) Chrome/117.0.0.0 Safari/537.36",
+			Referer: "https://www.gog.com/en/account/settings/subscriptions",
+			"Referrer-Policy": "strict-origin-when-cross-origin",
+		},
+	};
+	const response = UrlFetchApp.fetch("https://www.gog.com/account/switch_marketing_consent_switch", options);
+	if (response.getResponseCode() === 200) {
+		Logger.log("Unsubscribed newsletter.");
+	} else {
+		Logger.log("Failed to unsubscribe newsletter.");
+	}
+}
 function main() {
 	if (!webhook_url) {
 		Logger.log("You didn't specify webhook.");
