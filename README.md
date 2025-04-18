@@ -8,7 +8,9 @@
 </p>
 
 > [!IMPORTANT]
+>
 > There is always a risk when using automation software.
+>
 > No one is responsible if anything happens to your account.
 
 ## Features
