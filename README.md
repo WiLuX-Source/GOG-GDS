@@ -5,7 +5,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/license/WiLuX-Source/gog-gds?style=flat-square" alt="">
     <img src="https://img.shields.io/github/stars/WiLuX-Source/gog-gds?style=flat-square" alt="">
-</p
+</p>
 
 > [!IMPORTANT]
 > There is always a risk when using automation software.
