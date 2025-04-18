@@ -1,0 +1,9 @@
+{
+    "name": "goggds",
+    "type": "module",
+    "private":"true",
+    "devDependencies": {
+      "@types/google-apps-script": "latest",
+      "eslint": "^8.57.1"
+    }
+  }
